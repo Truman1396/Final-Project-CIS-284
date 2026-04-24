@@ -1,16 +1,21 @@
 public class Cardiologist extends MedicalProfessional {
-    
+
     public String specialty;
 
-    public Cardiologist(int docID, String docName, int availability){
+    // Creates a cardiologist and sets the specialty
+    public Cardiologist(int docID, String docName, int availability) {
         super(docID, docName, availability);
         specialty = "Cardiologist";
     }
 
-    public void performAction(){
+    // Shows what the cardiologist does
+    public void performAction() {
+        System.out.println(getDocName() + " checks heart-related problems.");
     }
 
-    public String txtPrep(){
-        return docID + "," + docName + "," + specialty + "," + availability
+    // Prepares cardiologist information for saving
+    //txtprep Compile
+    public String txtPrep() {
+        return getDocID() + "," + getDocName() + "," + specialty + "," + availability;
     }
 }
