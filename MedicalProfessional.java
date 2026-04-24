@@ -4,45 +4,53 @@ public abstract class MedicalProfessional {
     private String docName;
     public int availability;
 
-    public MedicalProfessional(){
+    // empty constructor
+    public MedicalProfessional() {
     }
 
-    public MedicalProfessional(int docID, String docName, int availability){
-
+    // sets the doctor's ID, name, and availability
+    public MedicalProfessional(int docID, String docName, int availability) {
         this.docID = docID;
         this.docName = docName;
-        this.availability = 1;
+        this.availability = availability;
     }
 
-    public int getDocID(){
+    // Returns the doctor's ID
+    public int getDocID() {
         return docID;
     }
 
-    public String getDocName(){
+    // returns the doctor's name
+    public String getDocName() {
         return docName;
     }
 
-    public void isAvailable(){
-        if (availability == 1){
+    // prints if the doctor is available or not
+    public void isAvailable() {
+        if (availability == 1) {
             System.out.println("Doctor " + docName + " is available");
-        } else{
+        } else {
             System.out.println("Doctor " + docName + " is not available");
         }
     }
 
-    public void changeAvailable(){
-        if (availability == 1){
+    // changes availability between available and not available
+    public void changeAvailable() {
+        if (availability == 1) {
             availability = 0;
-        } else if (availability == 0){
+        } else if (availability == 0) {
             availability = 1;
         }
     }
 
+    // each doctor class must define its own action
     public abstract void performAction();
 
+    // each doctor class must prepare its info for text storage
     public abstract String txtPrep();
 
-    public void displayInfo(){
+    // prints the doctor's basic information
+    public void displayInfo() {
         System.out.println("Doctor ID: " + docID);
         System.out.println("Doctor Name: " + docName);
         this.isAvailable();
