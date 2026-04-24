@@ -15,7 +15,7 @@ public abstract class MedicalProfessional {
         this.availability = availability;
     }
 
-    // Returns the doctor's ID
+    // returns the doctor's ID
     public int getDocID() {
         return docID;
     }
