@@ -13,4 +13,8 @@ public class EmergencyPatient extends Patient {
     public String getInfo() {
         return "[Emergency] " + super.getInfo();
     }
+
+    public String txtPrep(){
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+    }
 }
