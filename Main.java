@@ -1,62 +1,105 @@
 import java.util.ArrayList;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
 
-        // doctors
-
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
 
         ArrayList<MedicalProfessional> doctors = new ArrayList<>();
-        doctors.add(new Surgeon(101, "Dr. Smith", 1));
-        doctors.add(new Pediatrician(102, "Dr. Johnson", 1));
-        doctors.add(new Cardiologist(103, "Dr. Lee", 0));
-        doctors.add(new FamilyDoctor(104, "Dr. Brown", 1));
-        doctors.add(new Nurse(105, "Nurse Sarah", 1));
-
-        
-
-        // display doctors
-        for (MedicalProfessional d : doctors) {
-            d.displayInfo();
-            d.performAction();
-            System.out.println();
-        }
-
-        // admit patients
+        loadDoctorsFromFile(doctors);
         ArrayList<Patient> patients = new ArrayList<>();
+        loadPatientsFromFile(patients);
 
-        patients.add(new PediatricPatient("Liam", 201, 8, "Fever"));
-        patients.add(new EmergencyPatient("Carlos", 203, 30, "Accident"));
-        patients.add(new GeneralPatient("Ana", 204, 45, "Checkup"));
 
-        // update condition
-        patients.get(0).updateCondition("Available for discharge");
+        saveDoctorsToFile(doctors);
+        savePatientsToFile(patients);
+    }
 
-        // process patients
-        for (Patient p : patients) {
 
-            System.out.println(p.getInfo());
+//File Reading and Writing
 
-            // discharge
-            if (p.canBeDischarged()) {
-                System.out.println("Patient discharged");
+    //Reading Patient File
+    static void loadPatientsFromFile(ArrayList<Patient> patients) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Patients.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                String name = data[0];
+                int id = Integer.parseInt(data[1]);
+                int age = Integer.parseInt(data[2]);
+                String medicalIssue = data[3];
+
+                if (age <= 18){
+                    patients.add(new PediatricPatient(name, id, age, medicalIssue));
+                } else if (medicalIssue.equals("Chest Pain")){
+                    patients.add(new CardiologyPatient(name, id, age, medicalIssue));
+                } else if (medicalIssue.equals("Broken Bone")){
+                    patients.add(new EmergencyPatient(name, id, age, medicalIssue));
+                } else{
+                    patients.add(new GeneralPatient(name, id, age, medicalIssue));
+                }
+
             }
-
-            // assign doctor
-            else if (p.assignDoctorIfAvailable(1, 1, 0, 1, 1)) {
-                System.out.println("Doctor assigned: " + p.getDoctorType());
-            }
-
-            // airlift
-
-            else {
-                System.out.println("No doctor is available → Airlift patient");
-            }
-
-            System.out.println();
+        } catch (IOException e) {
+            System.out.println("No existing file found. Starting fresh.");
         }
-        scanner.close();
+    }
+
+    //Writing to Patient file
+    static void savePatientsToFile(ArrayList<Patient> patients){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Patients.txt"))) {
+            for (Patient pat : patients) {
+                bw.write(pat.txtPrep());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving file.");
+        }
+    }
+
+    //Reading Doctor File
+    static void loadDoctorsFromFile(ArrayList<MedicalProfessional> doctors) {
+        try (BufferedReader br = new BufferedReader(new FileReader("Doctors.txt"))) {
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] data = line.split(",");
+                int docID = Integer.parseInt(data[0]);
+                String docName = data[1];
+                String specialty = data[2];
+                int availability = Integer.parseInt(data[3]);
+
+                if (specialty.equals("Cardiologist")){
+                    doctors.add(new Cardiologist(docID, docName, specialty, availability));
+                } else if (specialty.equals("Family Doctor")){
+                    doctors.add(new FamilyDoctor(docID, docName, specialty, availability));
+                } else if (specialty.equals("Nurse")){
+                    doctors.add(new Nurse(docID, docName, specialty, availability));
+                } else if (specialty.equals("Pediatrician")){
+                    doctors.add(new Pediatrician(docID, docName, specialty, availability));
+                } else if (specialty.equals("Surgeon")){
+                    doctors.add(new Surgeon(docID, docName, specialty, availability));
+                }
+            }
+        } catch (IOException e) {
+            System.out.println("No existing file found. Starting fresh.");
+        }
+    }
+
+    //Writing to Doctor File
+    static void saveDoctorsToFile(ArrayList<MedicalProfessional> doctors){
+        try (BufferedWriter bw = new BufferedWriter(new FileWriter("Doctors.txt"))) {
+            for (MedicalProfessional doc : doctors) {
+                bw.write(doc.txtPrep());
+                bw.newLine();
+            }
+        } catch (IOException e) {
+            System.out.println("Error saving file.");
+        }
     }
 }
