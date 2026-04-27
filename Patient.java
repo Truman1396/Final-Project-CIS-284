@@ -1,7 +1,7 @@
-public class Patient {
+public abstract class Patient {
 
     protected String name;
-    protected int id;
+    private int id;
     protected int age;
     protected String medicalIssue;
     protected String condition;
@@ -45,8 +45,8 @@ public class Patient {
         return id;
     }
 
-    // thi checks if 
-    //needed doctor type is   available
+    // this checks if 
+    //needed doctor type is available
     public boolean assignDoctorIfAvailable(int pediatricians,
                                            int cardiologists,
                                            int surgeons,
@@ -67,4 +67,6 @@ public class Patient {
 
         return false;
     }
+
+    public abstract String txtPrep();
 }
