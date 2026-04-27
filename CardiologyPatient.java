@@ -14,4 +14,8 @@ public class CardiologyPatient extends Patient {
     public String getInfo() {
         return "[Cardiology] " + super.getInfo();
     }
+
+    public String txtPrep(){
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+    }
 }
