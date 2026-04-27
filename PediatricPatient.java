@@ -10,4 +10,8 @@ public class PediatricPatient extends Patient {
     public String getInfo() {
         return "[Pediatric] " + super.getInfo();
     }
+
+    public String txtPrep(){
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+    }
 }
