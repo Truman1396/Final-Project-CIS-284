@@ -1,20 +1,14 @@
 public class FamilyDoctor extends MedicalProfessional {
 
-    public String specialty;
+    public FamilyDoctor(int docID, String docName, String specialty, int availability){
 
-    //  family doctor and sets the specialty
-    public FamilyDoctor(int docID, String docName, int availability) {
-        super(docID, docName, availability);
-        specialty = "Family Doctor";
+        super(docID, docName, specialty, availability);
     }
 
-    // shows what the family doctor does
-    public void performAction() {
-        System.out.println(getDocName() + " treats general health problems.");
+    public void performAction(){
     }
 
-    // prepares family doctor information for saving
-    public String txtPrep() {
-        return getDocID() + "," + getDocName() + "," + specialty + "," + availability;
+    public String txtPrep(){
+        return this.getDocID() + "," + this.getDocName() + "," + specialty + "," + availability;
     }
 }
