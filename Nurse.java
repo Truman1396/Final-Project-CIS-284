@@ -1,20 +1,14 @@
 public class Nurse extends MedicalProfessional {
 
-    public String specialty;
+    public Nurse(int docID, String docName, String specialty, int availability){
 
-    // creates a nurse and sets the specialty
-    public Nurse(int docID, String docName, int availability) {
-        super(docID, docName, availability);
-        specialty = "Nurse";
+        super(docID, docName, specialty, availability);
     }
 
-    // shows   what the nurse do
-    public void performAction() {
-        System.out.println(getDocName() + " assists patients and doctors.");
+    public void performAction(){
     }
 
-    // it  prepares nurse information for saving
-    public String txtPrep() {
-        return getDocID() + "," + getDocName() + "," + specialty + "," + availability;
+    public String txtPrep(){
+        return this.getDocID() + "," + this.getDocName() + "," + specialty + "," + availability;
     }
 }
