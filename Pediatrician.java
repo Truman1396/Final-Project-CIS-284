@@ -1,16 +1,14 @@
 public class Pediatrician extends MedicalProfessional {
-    
-    public String specialty;
 
-    public Pediatrician(int docID, String docName, int availability){
-        super(docID, docName, availability);
-        specialty = "Pediatrician";
+    public Pediatrician(int docID, String docName, String specialty, int availability){
+
+        super(docID, docName, specialty, availability);
     }
 
     public void performAction(){
     }
 
     public String txtPrep(){
-        return docID + "," + docName + "," + specialty + "," + availability
+        return this.getDocID() + "," + this.getDocName() + "," + specialty + "," + availability;
     }
 }
