@@ -1,16 +1,14 @@
 public class Surgeon extends MedicalProfessional {
     
-    public String specialty;
+    public Surgeon(int docID, String docName, String specialty, int availability){
 
-    public Surgeon(int docID, String docName, int availability){
-        super(docID, docName, availability);
-        specialty = "Surgeon";
+        super(docID, docName, specialty, availability);
     }
 
-    public void performAction(){ 
+    public void performAction(){
     }
 
     public String txtPrep(){
-        return docID + "," + docName + "," + specialty + "," + availability
+        return this.getDocID() + "," + this.getDocName() + "," + specialty + "," + availability;
     }
 }
