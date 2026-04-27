@@ -12,4 +12,8 @@ public class GeneralPatient extends Patient {
     public String getInfo() {
         return "[General] " + super.getInfo();
     }
+
+    public String txtPrep(){
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+    }
 }
