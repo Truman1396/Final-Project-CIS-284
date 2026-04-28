@@ -2,10 +2,8 @@ public class CardiologyPatient extends Patient {
 
     // creates a cardiology patient and 
     //    assigns a cardiologist
-    public CardiologyPatient(String name, int id, int age, String medicalIssue) {
-        super(name, id, age, medicalIssue);
-        this.patientType = 2;
-        this.doctorType = "Cardiologist";
+    public CardiologyPatient(String name, int id, int age, String medicalIssue, String condition, String assignedDoctor) {
+        super(name, id, age, medicalIssue, condition, assignedDoctor);
     }
 
     // returns cardiology 
@@ -16,6 +14,6 @@ public class CardiologyPatient extends Patient {
     }
 
     public String txtPrep(){
-        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + condition + "," + assignedDoctor;
     }
 }
