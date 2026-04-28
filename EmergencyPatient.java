@@ -1,11 +1,8 @@
 public class EmergencyPatient extends Patient {
 
     // creates the emergency patient and assigns a surgeon
-    public EmergencyPatient(String name, int id, int age, String medicalIssue) {
-        super(name, id, age, medicalIssue);
-        this.patientType = 3;
-        this.doctorType = "Surgeon";
-        this.condition = "Emergency"; //always emergency
+    public EmergencyPatient(String name, int id, int age, String medicalIssue, String condition, String assignedDoctor) {
+        super(name, id, age, medicalIssue, condition, assignedDoctor);
     }
 
     // returns emergency patient info
@@ -15,6 +12,6 @@ public class EmergencyPatient extends Patient {
     }
 
     public String txtPrep(){
-        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + condition + "," + assignedDoctor;
     }
 }
