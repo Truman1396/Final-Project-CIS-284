@@ -22,7 +22,7 @@ public class Main {
 
             System.out.println();
             System.out.println("====Select Action====");
-            System.out.println("1.) Admit a Patient \n2.) Assign Patient a Doctor \n3.) Update Patient Condition \n4.) Discharge Patient \n5.) Display Patient Info \n6.) Exit");
+            System.out.println("1.) Admit a Patient \n2.) Assign Patient a Doctor \n3.) Discharge Patient \n4.) Display Patient Info \n5.) Exit");
             System.out.println();
             System.out.print("Enter the action you would like to perform: ");
             choice = Integer.parseInt(in.nextLine());
@@ -50,33 +50,154 @@ public class Main {
                         } else if (selection == 3){
                             tempMedicalIssue = "Other";
                         }
-                        patients.add(new PediatricPatient(tempName, tempID, tempAge, tempMedicalIssue));
+                        patients.add(new PediatricPatient(tempName, tempID, tempAge, tempMedicalIssue, "Checkup", null));
+                        System.out.println("Patient " + tempID + " admitted to the pediatrics unit");
                     } else if (selection == 1){
                         tempMedicalIssue = "Chest Pain";
-                        patients.add(new CardiologyPatient(tempName, tempID, tempAge, tempMedicalIssue));
+                        patients.add(new CardiologyPatient(tempName, tempID, tempAge, tempMedicalIssue, "Checkup", null));
+                        System.out.println("Patient " + tempID + " admitted to the cardiology unit");
                     } else if (selection == 2){
                         tempMedicalIssue = "Broken Bone";
-                        patients.add(new EmergencyPatient(tempName, tempID, tempAge, tempMedicalIssue));
+                        patients.add(new EmergencyPatient(tempName, tempID, tempAge, tempMedicalIssue, "Emergency", null));
+                        System.out.println("Patient " + tempID + " admitted to the emergency unit");
                     } else if (selection == 3){
                         tempMedicalIssue = "Other";
-                        patients.add(new GeneralPatient(tempName, tempID, tempAge, tempMedicalIssue));
+                        patients.add(new GeneralPatient(tempName, tempID, tempAge, tempMedicalIssue, "Checkup", null));
+                        System.out.println("Patient " + tempID + " admitted to the general unit");
+                    } else {
+                        System.out.println("Incorrect Information Provided");
                     }
                 } else {
                     System.out.println("Incorrect Information Provided");
                 }
+
+                
             } else if (choice == 2){
-                //Assign a doctor
+                System.out.print("Please enter Patient's ID number: ");
+                int number = Integer.parseInt(in.nextLine());
+                if (findPatient(number, patients) != null){
+                    Patient tempPatient = findPatient(number, patients);
+                    System.out.println("---Patient Info---");
+                    System.out.println(tempPatient.getInfo());
+                    System.out.println();
+
+                    if ((tempPatient.getAssignedDoctor()).equals(null)){
+                        if (tempPatient.getAge() <= 18){
+                            for (MedicalProfessional p : doctors){
+                                if ((p.getSpecialty()).equals("Pediatrician")){
+                                    if (p.getAvailability() == 1){
+                                        System.out.println(p.getDocName() + " has been assigned to Patient " + tempPatient.getId());
+                                        tempPatient.assignDoctor(p.getDocName());
+                                        p.changeAvailable();
+                                        tempPatient.updateCondition("Available for Discharge");
+                                        System.out.println("Patient " + tempPatient.getId() + " is available for discharge");
+                                        break;
+                                    } else {
+                                        System.out.println("No Available Doctors: Patient " + tempPatient.getId() + " recommended for airlift \n--Proceed?-- \n1.) Yes \n2.) No");
+                                        int airlift = Integer.parseInt(in.nextLine());
+                                        if (airlift == 1){
+                                            System.out.println("Patient " + tempPatient.getId() + " airlifted to another hospital");
+                                            patients.remove(tempPatient);
+                                        } else if (airlift != 0){
+                                            System.out.println("Invalid Information");
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        } else if ((tempPatient.getMedicalIssue()).equals("Chest Pain")){
+                            for (MedicalProfessional p : doctors){
+                                if ((p.getSpecialty()).equals("Cardiologist")){
+                                    if (p.getAvailability() == 1){
+                                        System.out.println(p.getDocName() + " has been assigned to Patient " + tempPatient.getId());
+                                        tempPatient.assignDoctor(p.getDocName());
+                                        p.changeAvailable();
+                                        tempPatient.updateCondition("Available for Discharge");
+                                        System.out.println("Patient " + tempPatient.getId() + " is available for discharge");
+                                        break;
+                                    } else {
+                                        System.out.println("No Available Doctors: Patient " + tempPatient.getId() + " recommended for airlift \n--Proceed?-- \n1.) Yes \n2.) No");
+                                        int airlift = Integer.parseInt(in.nextLine());
+                                        if (airlift == 1){
+                                            System.out.println("Patient " + tempPatient.getId() + " airlifted to another hospital");
+                                            patients.remove(tempPatient);
+                                        } else if (airlift != 0){
+                                            System.out.println("Invalid Information");
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        } else if ((tempPatient.getMedicalIssue()).equals("Broken Bone")){
+                            for (MedicalProfessional p : doctors){
+                                if ((p.getSpecialty()).equals("Surgeon")){
+                                    if (p.getAvailability() == 1){
+                                        System.out.println(p.getDocName() + " has been assigned to Patient " + tempPatient.getId());
+                                        tempPatient.assignDoctor(p.getDocName());
+                                        p.changeAvailable();
+                                        tempPatient.updateCondition("Available for Discharge");
+                                        System.out.println("Patient " + tempPatient.getId() + " is available for discharge");
+                                        break;
+                                    } else {
+                                        System.out.println("No Available Doctors: Patient " + tempPatient.getId() + " recommended for airlift \n--Proceed?-- \n1.) Yes \n2.) No");
+                                        int airlift = Integer.parseInt(in.nextLine());
+                                        if (airlift == 1){
+                                            System.out.println("Patient " + tempPatient.getId() + " airlifted to another hospital");
+                                            patients.remove(tempPatient);
+                                        } else if (airlift != 0){
+                                            System.out.println("Invalid Information");
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        } else if ((tempPatient.getMedicalIssue()).equals("Other")){
+                            for (MedicalProfessional p : doctors){
+                                if ((p.getSpecialty()).equals("Family Doctor")){
+                                    if (p.getAvailability() == 1){
+                                        System.out.println(p.getDocName() + " has been assigned to Patient " + tempPatient.getId());
+                                        tempPatient.assignDoctor(p.getDocName());
+                                        p.changeAvailable();
+                                        tempPatient.updateCondition("Available for Discharge");
+                                        System.out.println("Patient " + tempPatient.getId() + " is available for discharge");
+                                        break;
+                                    } else {
+                                        System.out.println("No Available Doctors: Patient " + tempPatient.getId() + " recommended for airlift \n--Proceed?-- \n1.) Yes \n2.) No");
+                                        int airlift = Integer.parseInt(in.nextLine());
+                                        if (airlift == 1){
+                                            System.out.println("Patient " + tempPatient.getId() + " airlifted to another hospital");
+                                            patients.remove(tempPatient);
+                                        } else if (airlift != 0){
+                                            System.out.println("Invalid Information");
+                                        }
+                                        break;
+                                    }
+                                }
+                            }
+                        }
+                    } else {
+                        System.out.println("Patient already has a doctor assigned");
+                    }
+                } else {
+                    System.out.println("Patient not found: Please select another action");
+                    System.out.println();
+                }
+
+
             } else if (choice == 3){
-                //Update Condition
-            } else if (choice == 4){
                 //Discharge Patient
-            } else if (choice == 5){
+
+
+            } else if (choice == 4){
                 System.out.println("---Patient Info---");
                 for (Patient p : patients){
                     System.out.println(p.getInfo());
                 }
-            } else if (choice == 6){
+
+
+            } else if (choice == 5){
                 System.out.println("Program Exited");
+
 
             //Catch everything else
             } else {
@@ -85,11 +206,25 @@ public class Main {
             }
 
 
-        } while (choice != 6);
+        } while (choice != 5);
 
         saveDoctorsToFile(doctors);
         savePatientsToFile(patients);
     }
+
+
+    //Confirm a Patient Exists
+    public static Patient findPatient(int id, ArrayList<Patient> patients){
+        for (Patient pat : patients){
+            if (pat.getId() == id){
+                return pat;
+            }
+        }
+        return null;
+    }
+
+
+
 
 
 //File Reading and Writing
@@ -104,15 +239,17 @@ public class Main {
                 int id = Integer.parseInt(data[1]);
                 int age = Integer.parseInt(data[2]);
                 String medicalIssue = data[3];
+                String condition = data[4];
+                String assignedDoctor = data[5];
 
                 if (age <= 18){
-                    patients.add(new PediatricPatient(name, id, age, medicalIssue));
+                    patients.add(new PediatricPatient(name, id, age, medicalIssue, condition, assignedDoctor));
                 } else if (medicalIssue.equals("Chest Pain")){
-                    patients.add(new CardiologyPatient(name, id, age, medicalIssue));
+                    patients.add(new CardiologyPatient(name, id, age, medicalIssue, condition, assignedDoctor));
                 } else if (medicalIssue.equals("Broken Bone")){
-                    patients.add(new EmergencyPatient(name, id, age, medicalIssue));
+                    patients.add(new EmergencyPatient(name, id, age, medicalIssue, condition, assignedDoctor));
                 } else{
-                    patients.add(new GeneralPatient(name, id, age, medicalIssue));
+                    patients.add(new GeneralPatient(name, id, age, medicalIssue, condition, assignedDoctor));
                 }
 
             }
