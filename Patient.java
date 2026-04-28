@@ -1,5 +1,6 @@
 public abstract class Patient {
 
+    //class variables
     protected String name;
     private int id;
     protected int age;
@@ -18,16 +19,12 @@ public abstract class Patient {
         this.assignedDoctor = assignedDoctor;
     }
 
-    // uptade on patients conditions.
+    // updates patient's conditions.
     public void updateCondition(String newCondition) {
         condition = newCondition;
     }
 
-    // makes sure if the patient is ready to leave.
-    public boolean canBeDischarged() {
-        return condition.equalsIgnoreCase("Discharge");
-    }
-
+    //Assigns doctor's name to the patient
     public void assignDoctor(String doctor){
         assignedDoctor = doctor;
     }
@@ -41,8 +38,7 @@ public abstract class Patient {
                ", Condition: " + condition;
     }
 
-    // Returns the patient's
-    //ID
+    //getter methods
     public int getId() {
         return id;
     }
@@ -59,5 +55,10 @@ public abstract class Patient {
         return assignedDoctor;
     }
 
+    public String getCondition(){
+        return condition;
+    }
+
+    //abstract method
     public abstract String txtPrep();
 }
