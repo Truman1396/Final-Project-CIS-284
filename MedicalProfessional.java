@@ -24,7 +24,15 @@ public abstract class MedicalProfessional {
         return docName;
     }
 
-    public void isAvailable(){
+    public int getAvailability(){
+        return availability;
+    }
+
+    public String getSpecialty(){
+        return specialty;
+    }
+
+    public void checkAvailable(){
         if (availability == 1){
             System.out.println("Doctor " + docName + " is available");
         } else{
@@ -47,6 +55,6 @@ public abstract class MedicalProfessional {
     public void displayInfo(){
         System.out.println("Doctor ID: " + docID);
         System.out.println("Doctor Name: " + docName + " (" + specialty + ")");
-        this.isAvailable();
+        this.checkAvailable();
     }
 }
