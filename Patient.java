@@ -5,27 +5,31 @@ public abstract class Patient {
     protected int age;
     protected String medicalIssue;
     protected String condition;
+    protected String assignedDoctor;
 
-    protected int patientType;
-    protected String doctorType;
 
     // creates a patient with basic info
-    public Patient(String name, int id, int age, String medicalIssue) {
+    public Patient(String name, int id, int age, String medicalIssue, String condition, String assignedDoctor) {
         this.name = name;
         this.id = id;
         this.age = age;
         this.medicalIssue = medicalIssue;
-        this.condition = "Checkup";
+        this.condition = condition;
+        this.assignedDoctor = assignedDoctor;
     }
 
     // uptade on patients conditions.
     public void updateCondition(String newCondition) {
-        this.condition = newCondition;
+        condition = newCondition;
     }
 
     // makes sure if the patient is ready to leave.
     public boolean canBeDischarged() {
         return condition.equalsIgnoreCase("Discharge");
+    }
+
+    public void assignDoctor(String doctor){
+        assignedDoctor = doctor;
     }
 
     // returns all patient info as text
@@ -34,9 +38,7 @@ public abstract class Patient {
                ", ID: " + id +
                ", Age: " + age +
                ", Issue: " + medicalIssue +
-               ", Condition: " + condition +
-               ", Type#: " + patientType +
-               ", Doctor: " + doctorType;
+               ", Condition: " + condition;
     }
 
     // Returns the patient's
@@ -45,27 +47,16 @@ public abstract class Patient {
         return id;
     }
 
-    // this checks if 
-    //needed doctor type is available
-    public boolean assignDoctorIfAvailable(int pediatricians,
-                                           int cardiologists,
-                                           int surgeons,
-                                           int familyDoctors,
-                                           int nurses) {
+    public int getAge(){
+        return age;
+    }
 
-        if (doctorType.equals("Pediatrician") && pediatricians > 0) {
-            return true;
-        } else if (doctorType.equals("Cardiologist") && cardiologists > 0) {
-            return true;
-        } else if (doctorType.equals("Surgeon") && surgeons > 0) {
-            return true;
-        } else if (doctorType.equals("Family Doctor") && familyDoctors > 0) {
-            return true;
-        } else if (doctorType.equals("Nurse") && nurses > 0) {
-            return true;
-        }
+    public String getMedicalIssue(){
+        return medicalIssue;
+    }
 
-        return false;
+    public String getAssignedDoctor(){
+        return assignedDoctor;
     }
 
     public abstract String txtPrep();
