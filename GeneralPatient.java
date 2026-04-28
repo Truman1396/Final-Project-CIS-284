@@ -1,10 +1,8 @@
 public class GeneralPatient extends Patient {
 
     //  general patient and assigns a family doctor
-    public GeneralPatient(String name, int id, int age, String medicalIssue) {
-        super(name, id, age, medicalIssue);
-        this.patientType = 4;
-        this.doctorType = "Family Doctor";
+    public GeneralPatient(String name, int id, int age, String medicalIssue, String condition, String assignedDoctor) {
+        super(name, id, age, medicalIssue, condition, assignedDoctor);
     }
 
     // returns the general patient information
@@ -14,6 +12,6 @@ public class GeneralPatient extends Patient {
     }
 
     public String txtPrep(){
-        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + patientType + "," + doctorType;
+        return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + condition + "," + assignedDoctor;
     }
 }
