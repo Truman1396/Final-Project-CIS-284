@@ -1,6 +1,6 @@
 public class GeneralPatient extends Patient {
 
-    //  general patient and assigns a family doctor
+    //  creates a general patient (constructor)
     public GeneralPatient(String name, int id, int age, String medicalIssue, String condition, String assignedDoctor) {
         super(name, id, age, medicalIssue, condition, assignedDoctor);
     }
@@ -11,6 +11,7 @@ public class GeneralPatient extends Patient {
         return "[General] " + super.getInfo();
     }
 
+    //prepares info for file writing
     public String txtPrep(){
         return name + "," + this.getId() + "," + age + "," + medicalIssue + "," + condition + "," + assignedDoctor;
     }
