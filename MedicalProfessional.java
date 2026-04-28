@@ -1,13 +1,16 @@
 public abstract class MedicalProfessional {
 
+    //Class Variables
     private int docID;
     private String docName;
     public int availability;
     public String specialty;
 
+    //empty constructor
     public MedicalProfessional(){
     }
 
+    //Constructor
     public MedicalProfessional(int docID, String docName, String specialty, int availability){
 
         this.docID = docID;
@@ -16,6 +19,7 @@ public abstract class MedicalProfessional {
         this.availability = availability;
     }
 
+    //getter methods
     public int getDocID(){
         return docID;
     }
@@ -32,6 +36,7 @@ public abstract class MedicalProfessional {
         return specialty;
     }
 
+    //Checks if a doctor is available
     public void checkAvailable(){
         if (availability == 1){
             System.out.println("Doctor " + docName + " is available");
@@ -40,6 +45,7 @@ public abstract class MedicalProfessional {
         }
     }
 
+    //Changes doctor's availability
     public void changeAvailable(){
         if (availability == 1){
             availability = 0;
@@ -48,13 +54,14 @@ public abstract class MedicalProfessional {
         }
     }
 
+    //Abstract methods
     public abstract void performAction();
 
     public abstract String txtPrep();
 
+    //Display doctor info
     public void displayInfo(){
-        System.out.println("Doctor ID: " + docID);
-        System.out.println("Doctor Name: " + docName + " (" + specialty + ")");
+        System.out.println("Doctor ID: " + docID + ", Doctor Name: " + docName + " (" + specialty + ")");
         this.checkAvailable();
     }
 }
