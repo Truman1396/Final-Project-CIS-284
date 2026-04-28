@@ -1,10 +1,9 @@
 101,Dr. Samson,Cardiologist,1
-110,Dr. Harper,Cardiologist,0
+110,Dr. Harper,Cardiologist,1
 102,Dr. Harris,Family Doctor,1
-112,Dr. Grimes,Family Doctor,0
-103,Dr. Tippett,Nurse,1
-113,Dr. Thompson,Nurse,0
+112,Dr. Grimes,Family Doctor,1
+113,Nurse Thompson,Nurse,1
 104,Dr. Blankenship,Pediatrician,1
-114,Dr. Lynn,Pediatrician,0
+114,Dr. Lynn,Pediatrician,1
 105,Dr. Toney,Surgeon,1
-115,Dr. Strauss,Surgeon,0
+115,Dr. Strauss,Surgeon,1
