@@ -212,7 +212,7 @@ public class Main {
                 if (findPatient(number, patients) != null){
                     Patient tempPatient = findPatient(number, patients);
                     if ((tempPatient.getCondition()).equals("Available for Discharge")){
-                        System.out.println("Patient " + tempPatient.getId() + " is available for discharge: \n--Proceed?-- \n1.) Yes \n2.) No \n-> ");
+                        System.out.print("Patient " + tempPatient.getId() + " is available for discharge: \n--Proceed?-- \n1.) Yes \n2.) No \n-> ");
                         int decision = Integer.parseInt(in.nextLine());
                         if (decision == 1){
                             MedicalProfessional finalCheck = findDoctor("Nurse Thompson", doctors);
